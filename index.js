@@ -1,4 +1,5 @@
-// require('graphdat');
+require('graphdat');
+
 var express = require("express");
 var engine = require("./game");
 var conf = {
