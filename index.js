@@ -1,3 +1,4 @@
+// require('graphdat');
 var express = require("express");
 var engine = require("./game");
 var conf = {
@@ -22,6 +23,11 @@ app.use(express.cookieSession({
 
 app.get("/activeGames", function(req, res, next) {
 	res.send(engine.activeGames());
+});
+
+app.get("/changeDifficulty", function(req, res, next) {
+	req.session = null;
+	res.redirect("/");
 });
 
 app.get("/newGame", function(req, res, next) {
