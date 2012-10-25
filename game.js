@@ -52,7 +52,7 @@ Game.prototype.validMove = function validateMove(x, y) {
 };
 
 Game.prototype.randomMove = function(spots, callback) {
-	callback(null, Math.floor(Math.random() * spots.length));
+	callback(null, spots[Math.floor(Math.random() * spots.length)]);
 };
 
 Game.prototype.cleverMove = function(spots, callback) {
