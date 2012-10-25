@@ -15,7 +15,7 @@ You need to include the graphdat module at the top of your main file before any 
 
 ![Graphdat Overview](https://raw.github.com/sugendran/noughtsandcrosses/master/README_IMAGES/graphdat-overview.png)
 
- The HttpRequest object in any method that handles an HttpRequest will include a `graphdat` object. This is useful because we can add additional information to what Graphdat reports. As an example, let's use the path that a player hits when they want to make a move. The path is */move/:x/:y* and has 3 steps: load the game from the session state, validate the move and then finally make that move. Now if we care about performance we want to measure each step and see if we can improve it. And overtime our graph should show this improvement.
+ The HttpRequest object in any method that handles an HttpRequest will include a `graphdat` object. This is useful because we can add additional information to what Graphdat reports. As an example, let's use the path that a player hits when they want to make a move. The path is `/move/:x/:y` and has 3 steps: load the game from the session state, validate the move and then finally make that move. Now if we care about performance we want to measure each step and see if we can improve it. And overtime our graph should show this improvement.
 
 The `graphdat` object that is added to the HttpRequest will let you begin and end a timer so that you can measure each section. The following snippet illustrates how it works
 
