@@ -57,11 +57,17 @@ app.get("/move/:x/:y", function(req, res, next) {
 	if(x < 0 || x > 2 || y < 0 || y > 2) {
 		return res.next(new Error("Invalid Co-ordinates!"));
 	}
+	req.graphdat.begin("loadGame");
 	engine.loadGame(req.session.gameState, function(err, game) {
+		req.graphdat.end("loadGame");
+		req.graphdat.begin("validateMove");
 		if(!game.validMove(x, y)) {
 			return next(new Error("You just made an invalid move!"));
 		}
+		req.graphdat.end("validateMove");
+		req.graphdat.begin("makeMove");
 		game.move(x, y, function(err, gameState) {
+			req.graphdat.end("makeMove");
 			req.session.gameState = gameState;
 			res.redirect("/");
 		});
@@ -70,10 +76,14 @@ app.get("/move/:x/:y", function(req, res, next) {
 
 app.get("/", function(req, res, next) {
 	if(req.session.gameState) {
+		req.graphdat.begin("loadGame");
 		engine.loadGame(req.session.gameState, function(err, game) {
+			req.graphdat.end("loadGame");
+			req.graphdat.begin("render");
 			res.render("index", game.gameState());
 		});
 	} else {
+		req.graphdat.begin("render");
 		res.render("index");
 	}
 });
