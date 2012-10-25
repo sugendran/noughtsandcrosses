@@ -1,0 +1,19 @@
+{
+  "name": "noughtsandcrosses",
+  "version": "0.0.0",
+  "description": "A game of noughts and crosses",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sugendran/noughtsandcrosses.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "jade": "~0.27.6",
+    "express": "~3.0.0"
+  }
+}

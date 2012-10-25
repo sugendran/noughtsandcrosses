@@ -1,0 +1,69 @@
+doctype 5
+html(lang="en")
+  head
+    title Noughts and Crosses
+    style
+      html, body {
+        font-family: sans-serif;
+        text-align: center
+      }
+      img {
+        display: inline;
+      }
+      #container {
+        width: 640px;
+        margin: 0px auto;
+      }
+      .error {
+        color: red
+      }
+      @-webkit-keyframes colorPulse {
+        0% {background-color: rgba(255,251,188,1);}
+        50% {background-color: rgba(255,251,188,0.5);}
+        100% {background-color: rgba(255,251,188,1);}
+      }
+      table tr td a {
+        height: 64px;
+        width: 64px;
+        display: block;
+        border-radius: 16px
+      }
+      table tr td a.empty:hover {
+        -webkit-animation: colorPulse 1s infinite;
+      }
+  body
+    #container
+      h1 Noughts and Crosses
+      if "undefined" !== typeof(error)
+        h2.error= error
+      if "undefined" === typeof(gameboard)
+        div
+          form(action="/startGame", method="POST")
+            fieldset
+              legend Create Game
+              label(for="difficulty") Opponent
+              select(name="difficulty", id="difficulty")
+                option(value="random") Crazy Person
+                option(value="hard") Hard
+              input(type="submit", value="Create Game")
+      else
+        div
+          if "undefined" !== typeof(active) && !active
+            if winner === "user"
+              h2 You Win!
+            else if winner === "computer"
+              h2 You Lose!
+            else
+              h2 It's a draw.
+            h3
+              a(href="/newGame") Click to play again
+            hr
+          else
+            - active = false
+          table(align="center")
+            each row, x in gameboard
+              tr
+                each col, y in row
+                  td
+                    a(href="/move/#{x}/#{y}", class="#{col}")
+                      img(src="/#{col}.png", alt="#{col}", width="64", height="64")
